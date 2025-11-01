@@ -1,10 +1,21 @@
 import express from "express";
 import { pool } from "./db/connection.js";
+import cors from "cors";
 import docRoutes from "./routes/docRouter.js";
 
 
 const app = express();
 const PORT = process.env.PORT || 3333;
+
+app.use(cors());
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // domínio do seu front-end
+    methods: ["GET", "POST", "PUT", "DELETE"],  
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+)
 
 app.use(express.json());
 
